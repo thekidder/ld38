@@ -44,6 +44,23 @@ public class Player : MonoBehaviour {
 		return diamonds;
 	}
 
+	public bool CanDeliverGems() {
+		foreach(GemWarehouse warehouse in GameObject.FindObjectsOfType(typeof(GemWarehouse))) {
+			if (warehouse.containedResources < warehouse.maxResources) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public int GemCapacity() {
+		int c = 0;
+		foreach(GemWarehouse warehouse in GameObject.FindObjectsOfType(typeof(GemWarehouse))) {
+			c += warehouse.maxResources.diamonds;
+		}
+		return c;
+	}
+
 	public void AddResources(PlayerResources r) {
 		currentResources += new PlayerResources(r.gold, 0);
 

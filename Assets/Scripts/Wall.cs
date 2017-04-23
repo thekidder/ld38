@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wall : MonoBehaviour {
+public class Wall : Actor {
 	public Sprite wallHorizontal;
 	public Sprite wallVertical;
 	public Sprite wallFrontRight;
@@ -20,10 +20,6 @@ public class Wall : MonoBehaviour {
 	
 	void Update () {
 		
-	}
-
-	bool findBuilding(Vector2 pos) {
-		return Physics2D.OverlapPoint(pos, LayerMask.GetMask("Building")) != null;
 	}
 
 	public void Redisplay() {

@@ -80,10 +80,6 @@ public class Tower : Actor {
 		}
 	}
 
-	bool findBuilding(Vector2 pos) {
-		return Physics2D.OverlapPoint(pos, LayerMask.GetMask("Building")) != null;
-	}
-
 	public void Redisplay() {
 		// Debug.Log(name + " REDISPLAY");
 

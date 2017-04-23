@@ -8,13 +8,22 @@ public class ResourceDisplay : MonoBehaviour {
 
 	public Text gold;
 	public Text diamonds;
+	public Text goal;
+	public GameObject gemsFull;
 
 	void Start () {
 		
 	}
 	
 	void Update () {
+		goal.text = "Accumulate " + player.diamondGoal + " gems";
+
+		int gems = player.GetDiamonds();
+		int maxGems = player.GemCapacity();
+
+		gemsFull.SetActive(gems == maxGems);
+
 		gold.text = "Gold: " + player.currentResources.gold;
-		diamonds.text = "Diamonds: " + player.GetDiamonds() + " / " + player.diamondGoal;
+		diamonds.text = "Gems: " + gems + " / " + maxGems;
 	}
 }

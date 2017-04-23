@@ -6,6 +6,7 @@ public class Merchant : Boat {
 	enum State {
 		DEPOSITING,
 		RETURNING,
+		WAIT_FOR_WAREHOUSE,
 		LOADING,
 		DELIVERING
 	}
@@ -23,11 +24,16 @@ public class Merchant : Boat {
 
 	protected override void Start () {
 		base.Start();
-		StartBehavior(Load());
+		currentState = State.WAIT_FOR_WAREHOUSE;
 	}
 	
 	void FixedUpdate () {
 		switch (currentState) {
+			case State.WAIT_FOR_WAREHOUSE:
+				if (resourcesToGive.diamonds == 0 || player.CanDeliverGems()) {
+					StartBehavior(Load());
+				}
+				break;
 			case State.DELIVERING:
 				MoveTowards(depositZone);
 				break;
@@ -49,7 +55,7 @@ public class Merchant : Boat {
 				break;
 			case State.RETURNING:
 				if (collider.gameObject == loadingZone) {
-					StartBehavior(Load());
+					currentState = State.WAIT_FOR_WAREHOUSE;
 				}
 				break;
 			case State.LOADING:
@@ -61,7 +67,7 @@ public class Merchant : Boat {
 	void OnHit() {
 		CancelBehavior();
 		this.transform.position = new Vector3(this.loadingZone.transform.position.x, this.loadingZone.transform.position.y, -1f);
-		StartBehavior(Load());
+		currentState = State.WAIT_FOR_WAREHOUSE;
 	}
 
 	IEnumerator Deposit() {

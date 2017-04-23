@@ -19,4 +19,10 @@ public class Actor : MonoBehaviour {
 		}
 		currentBehavior = null;
 	}
+
+	protected bool findBuilding(Vector2 pos) {
+		Collider2D building = Physics2D.OverlapPoint(pos, LayerMask.GetMask("Building"));
+		if (building == null) { return false; }
+		return building.GetComponent<Wall>() != null || building.GetComponent<Tower>() != null;
+	}
 }

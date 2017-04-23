@@ -29,6 +29,9 @@ public class GemWarehouse : MonoBehaviour {
 		}
 	}
 
+	public void SetBuildSite(GameObject site) {
+	}
+
 	void FixedUpdate() {
 		pirateTarget.value = containedResources.diamonds > 0 ? pirateValue : 0;
 	}
