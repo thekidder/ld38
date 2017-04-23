@@ -8,6 +8,7 @@ public class PurchaseButton : MonoBehaviour {
 	public Player player;
 	public PlayerResources cost;
 	public GameObject prefab;
+	public bool inWater;
 
 	private Button button;
 
@@ -20,6 +21,6 @@ public class PurchaseButton : MonoBehaviour {
 	}
 
 	public void Select() {
-		cursor.ChooseStructure(prefab, cost);
+		cursor.ChooseStructure(prefab, inWater, cost);
 	}
 }

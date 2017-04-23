@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 public class Player : MonoBehaviour {
 	public GameObject victoryOverlay;
+	public Text victoryText;
 
 	public PlayerResources currentResources;
 	public int diamondGoal;
@@ -26,8 +27,12 @@ public class Player : MonoBehaviour {
 
 	IEnumerator NextLevel() {
 		yield return new WaitForSecondsRealtime(3f);
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-		Time.timeScale = 1f;
+		if (SceneManager.GetActiveScene().buildIndex + 1 < SceneManager.sceneCountInBuildSettings) {
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+			Time.timeScale = 1f;
+		} else {
+			victoryText.text = "You win!";
+		}
 	}
 
 	public int GetDiamonds() {
@@ -55,5 +60,9 @@ public class Player : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	public void Reload() {
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 }

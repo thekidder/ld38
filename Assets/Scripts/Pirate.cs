@@ -145,6 +145,12 @@ public class Pirate : Boat {
 			return false;
 		}
 
+		bool underUi = Physics2D.OverlapPoint(target.transform.position, LayerMask.GetMask("UI")) != null;
+
+		if (underUi) {
+			return false;
+		} 
+
 		Vector2 direction = (Vector2)transform.position - (Vector2)target.transform.position;
 
 		return direction.magnitude < searchRange;
@@ -199,7 +205,7 @@ public class Pirate : Boat {
 		}
 
 		// check in a cone to have a better shot of not getting stuck
-		float epsilonDegrees = 5f;
+		float epsilonDegrees = 10f;
 		if (!HasClearShot(direction.Rotate(-epsilonDegrees), target)) {
 			return false;
 		}
