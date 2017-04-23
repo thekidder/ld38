@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Merchant : MonoBehaviour {
+public class Merchant : Boat {
 	enum State {
 		DEPOSITING,
 		RETURNING,
@@ -16,19 +16,14 @@ public class Merchant : MonoBehaviour {
 	public float deliverTime;
 	public float loadTime;
 
-	public Sprite side;
-	public Sprite back;
-
 	private State currentState;
 
 	public Player player;
 	public PlayerResources resourcesToGive;
 
-	private SpriteRenderer spriteRenderer;
-
-	void Start () {
-		spriteRenderer = GetComponent<SpriteRenderer>();
-		StartCoroutine(Load());
+	protected override void Start () {
+		base.Start();
+		StartBehavior(Load());
 	}
 	
 	void FixedUpdate () {
@@ -49,12 +44,12 @@ public class Merchant : MonoBehaviour {
 		switch (currentState) {
 			case State.DELIVERING:
 				if (collider.gameObject == depositZone) {
-					StartCoroutine(Deposit());
+					StartBehavior(Deposit());
 				}
 				break;
 			case State.RETURNING:
 				if (collider.gameObject == loadingZone) {
-					StartCoroutine(Load());
+					StartBehavior(Load());
 				}
 				break;
 			case State.LOADING:
@@ -63,39 +58,24 @@ public class Merchant : MonoBehaviour {
 		}
 	}
 
+	void OnHit() {
+		CancelBehavior();
+		this.transform.position = this.loadingZone.transform.position;
+		StartBehavior(Load());
+	}
+
 	IEnumerator Deposit() {
 		currentState = State.DEPOSITING;
 		yield return new WaitForSeconds(deliverTime);
 		player.currentResources += resourcesToGive;
 		currentState = State.RETURNING;
+		currentBehavior = null;
 	}
 
 	IEnumerator Load() {
 		currentState = State.LOADING;
 		yield return new WaitForSeconds(loadTime);
 		currentState = State.DELIVERING;
-	}
-
-	void MoveTowards(GameObject dest) {
-		Vector2 direction = GetDirection(dest);
-		SetFacing(direction);
-		transform.position += (Vector3)(1f / Constants.PIXEL_SIZE * direction);
-	}
-
-	Vector2 GetDirection(GameObject dest) {
-		Vector2 direction = dest.transform.position - transform.position;
-		if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y)) {
-			return Mathf.Sign(direction.x) * Vector2.right;
-		} else {
-			return Mathf.Sign(direction.y) * Vector2.up;
-		}
-	}
-
-	void SetFacing(Vector2 direction) {
-		if (direction.x != 0.0f) {
-			spriteRenderer.sprite = side;
-		} else {
-			spriteRenderer.sprite = back;
-		}
+		currentBehavior = null;
 	}
 }
