@@ -26,7 +26,7 @@ public class Player : MonoBehaviour {
 	}
 
 	IEnumerator NextLevel() {
-		yield return new WaitForSecondsRealtime(3f);
+		yield return new WaitForSecondsRealtime(2f);
 		if (SceneManager.GetActiveScene().buildIndex + 1 < SceneManager.sceneCountInBuildSettings) {
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 			Time.timeScale = 1f;
@@ -48,10 +48,10 @@ public class Player : MonoBehaviour {
 		currentResources += new PlayerResources(r.gold, 0);
 
 		foreach(GemWarehouse warehouse in GameObject.FindObjectsOfType(typeof(GemWarehouse))) {
-			Debug.Log("warehouse?");
+			// Debug.Log("warehouse?");
 			if (warehouse.containedResources < warehouse.maxResources) {
 				int diamonds = Mathf.Min(r.diamonds, warehouse.maxResources.diamonds - warehouse.containedResources.diamonds);
-				Debug.Log("deposting " + diamonds + " diamonds");
+				// Debug.Log("deposting " + diamonds + " diamonds");
 				PlayerResources toGive = new PlayerResources(0, diamonds);
 				warehouse.containedResources += toGive;
 				r -= toGive;

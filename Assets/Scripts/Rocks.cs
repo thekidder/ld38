@@ -13,7 +13,10 @@ public class Rocks : MonoBehaviour {
 		yield return new WaitForSeconds(liveTime);
 		Destroy(gameObject);
 	}
-	
+
+	public void SetBuildSite(GameObject site) {
+	}
+
 	void Update () {
 		
 	}

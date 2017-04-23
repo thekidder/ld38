@@ -36,7 +36,6 @@ public class Cursor : MonoBehaviour {
 		Collider2D boatCollider = Physics2D.OverlapBox(transform.position, waterSiteSize, 0f, LayerMask.GetMask("Boat", "Island"));
 
 		if (structure != null && inWater && boatCollider != null) {
-			Debug.Log(boatCollider.gameObject.name);
 			Color c = spriteRenderer.color;
 			c.a = 0.5f;
 			spriteRenderer.color = c;

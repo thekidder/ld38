@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: c1c816ee6549d4412a5ab32c4640fa10
-timeCreated: 1492983055
+timeCreated: 1492984136
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -684,6 +684,7 @@ TextureImporter:
     21301354: rocks
     21301356: UI-panel
     21301358: UI button
+    21301360: UI BG
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -3925,19 +3926,6 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tower-small-tl
-      rect:
-        serializedVersion: 2
-        x: 108
-        y: 122
-        width: 4
-        height: 4
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
       name: build-site
       rect:
         serializedVersion: 2
@@ -5429,32 +5417,6 @@ TextureImporter:
         height: 3
       alignment: 9
       pivot: {x: 0.5, y: 0.6666667}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: tower-small-t1
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 120
-        width: 4
-        height: 5
-      alignment: 9
-      pivot: {x: 0.5, y: 0.4}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: tower-small-t2
-      rect:
-        serializedVersion: 2
-        x: 116
-        y: 120
-        width: 4
-        height: 5
-      alignment: 9
-      pivot: {x: 0.5, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -6980,84 +6942,6 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tower-small-bl
-      rect:
-        serializedVersion: 2
-        x: 108
-        y: 108
-        width: 4
-        height: 6
-      alignment: 9
-      pivot: {x: 0.5, y: 0.33333334}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: tower-small-b1
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 108
-        width: 4
-        height: 5
-      alignment: 9
-      pivot: {x: 0.5, y: 0.4}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: tower-small-b2
-      rect:
-        serializedVersion: 2
-        x: 116
-        y: 108
-        width: 4
-        height: 5
-      alignment: 9
-      pivot: {x: 0.5, y: 0.4}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: tower-small-br
-      rect:
-        serializedVersion: 2
-        x: 120
-        y: 108
-        width: 4
-        height: 6
-      alignment: 9
-      pivot: {x: 0.5, y: 0.33333334}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: tower-small-r
-      rect:
-        serializedVersion: 2
-        x: 120
-        y: 114
-        width: 4
-        height: 2
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: tower-small-l
-      rect:
-        serializedVersion: 2
-        x: 108
-        y: 114
-        width: 4
-        height: 2
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
       name: tower-small-tr
       rect:
         serializedVersion: 2
@@ -7170,8 +7054,21 @@ TextureImporter:
         width: 8
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 2, y: 2, z: 2, w: 2}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: UI BG
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 120
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     outline: []
