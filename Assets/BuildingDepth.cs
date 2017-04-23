@@ -12,7 +12,7 @@ public class BuildingDepth : MonoBehaviour {
 
 	public void Redisplay() {
 		Vector3 pos = transform.position;
-		pos.z = pos.y / 10f;
+		pos.z = pos.y / 10f - 4f;
 
 		transform.position = pos;
 	}

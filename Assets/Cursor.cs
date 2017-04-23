@@ -27,7 +27,7 @@ public class Cursor : MonoBehaviour {
 			transform.position = new Vector3(site.gameObject.transform.position.x, site.gameObject.transform.position.y, 0f);
 			buildingDepth.Redisplay();
 		} else {
-			transform.position = new Vector3(mouseWorldPos.x, mouseWorldPos.y, -100f);
+			transform.position = new Vector3(mouseWorldPos.x, mouseWorldPos.y, -200f);
 		}
 
 		if (Input.GetMouseButtonDown(1)) {

@@ -26,7 +26,7 @@ public class Player : MonoBehaviour {
 
 	IEnumerator NextLevel() {
 		yield return new WaitForSecondsRealtime(3f);
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 		Time.timeScale = 1f;
 	}
 

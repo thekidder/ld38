@@ -66,7 +66,7 @@ public class Pirate : Boat {
 	private GameObject currentTarget;
 	private int currentHp;
 
-	private GameObject lastTargeter = null;
+	// private GameObject lastTargeter = null;
 	private float lastTargetTime = 0f;
 	
 	protected override void Start() {
@@ -158,7 +158,7 @@ public class Pirate : Boat {
 			currentTarget = source;
 
 			lastTargetTime = Time.time;
-			lastTargeter = source;
+			// lastTargeter = source;
 		}
 	}
 
