@@ -5,7 +5,7 @@ using UnityEngine;
 public class BuildSite : MonoBehaviour {
 	public float maxOpacity = 0.25f;
 	public float minOpacity = 0.0f;
-	public float opacityStep = 0.0025f;
+	public float opacityStep = 0.005f;
 
 
 	private SpriteRenderer spriteRenderer;

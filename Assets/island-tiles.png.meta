@@ -1,37 +1,37 @@
 fileFormatVersion: 2
 guid: c1c816ee6549d4412a5ab32c4640fa10
-timeCreated: 1492919474
+timeCreated: 1492928726
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: island-tiles_0
-    21300002: island-tiles_1
-    21300004: island-tiles_2
-    21300006: island-tiles_3
-    21300008: island-tiles_4
-    21300010: island-tiles_5
+    21300000: island-tl
+    21300002: island-t
+    21300004: island-tr
+    21300006: island-concave-tl
+    21300008: island-concave-t
+    21300010: island-concave-tr
     21300012: island-tiles_6
-    21300014: island-tiles_7
+    21300014: dock-vert-t
     21300016: island-tiles_8
     21300018: island-tiles_9
-    21300020: island-tiles_10
-    21300022: island-tiles_11
-    21300024: island-tiles_12
-    21300026: island-tiles_13
-    21300028: island-tiles_14
-    21300030: island-tiles_15
+    21300020: island-l
+    21300022: island-c
+    21300024: island-r
+    21300026: island-concave-l
+    21300028: ocean
+    21300030: island-concave-r
     21300032: island-tiles_16
-    21300034: island-tiles_17
+    21300034: dock-vert-b
     21300036: island-tiles_18
     21300038: island-tiles_19
-    21300040: island-tiles_20
-    21300042: island-tiles_21
-    21300044: island-tiles_22
-    21300046: island-tiles_23
-    21300048: island-tiles_24
-    21300050: island-tiles_25
-    21300052: island-tiles_26
-    21300054: island-tiles_27
+    21300040: island-bl
+    21300042: island-b
+    21300044: island-br
+    21300046: island-concave-bl
+    21300048: island-concave-b
+    21300050: island-concave-br
+    21300052: dock-horz-l
+    21300054: dock-horz-r
     21300056: boat-side
     21300058: tower-horizontal
     21300060: boat-back
@@ -267,7 +267,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: island-tiles_0
+      name: island-tl
       rect:
         serializedVersion: 2
         x: 0
@@ -280,7 +280,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: island-tiles_1
+      name: island-t
       rect:
         serializedVersion: 2
         x: 8
@@ -293,7 +293,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: island-tiles_2
+      name: island-tr
       rect:
         serializedVersion: 2
         x: 16
@@ -306,7 +306,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: island-tiles_3
+      name: island-concave-tl
       rect:
         serializedVersion: 2
         x: 24
@@ -319,7 +319,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: island-tiles_4
+      name: island-concave-t
       rect:
         serializedVersion: 2
         x: 32
@@ -332,7 +332,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: island-tiles_5
+      name: island-concave-tr
       rect:
         serializedVersion: 2
         x: 40
@@ -358,7 +358,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: island-tiles_7
+      name: dock-vert-t
       rect:
         serializedVersion: 2
         x: 56
@@ -397,7 +397,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: island-tiles_10
+      name: island-l
       rect:
         serializedVersion: 2
         x: 0
@@ -410,7 +410,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: island-tiles_11
+      name: island-c
       rect:
         serializedVersion: 2
         x: 8
@@ -423,7 +423,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: island-tiles_12
+      name: island-r
       rect:
         serializedVersion: 2
         x: 16
@@ -436,7 +436,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: island-tiles_13
+      name: island-concave-l
       rect:
         serializedVersion: 2
         x: 24
@@ -449,7 +449,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: island-tiles_14
+      name: ocean
       rect:
         serializedVersion: 2
         x: 32
@@ -462,7 +462,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: island-tiles_15
+      name: island-concave-r
       rect:
         serializedVersion: 2
         x: 40
@@ -488,7 +488,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: island-tiles_17
+      name: dock-vert-b
       rect:
         serializedVersion: 2
         x: 56
@@ -527,7 +527,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: island-tiles_20
+      name: island-bl
       rect:
         serializedVersion: 2
         x: 0
@@ -540,7 +540,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: island-tiles_21
+      name: island-b
       rect:
         serializedVersion: 2
         x: 8
@@ -553,7 +553,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: island-tiles_22
+      name: island-br
       rect:
         serializedVersion: 2
         x: 16
@@ -566,7 +566,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: island-tiles_23
+      name: island-concave-bl
       rect:
         serializedVersion: 2
         x: 24
@@ -579,7 +579,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: island-tiles_24
+      name: island-concave-b
       rect:
         serializedVersion: 2
         x: 32
@@ -592,7 +592,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: island-tiles_25
+      name: island-concave-br
       rect:
         serializedVersion: 2
         x: 40
@@ -605,7 +605,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: island-tiles_26
+      name: dock-horz-l
       rect:
         serializedVersion: 2
         x: 48
@@ -618,7 +618,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: island-tiles_27
+      name: dock-horz-r
       rect:
         serializedVersion: 2
         x: 56
@@ -2550,7 +2550,7 @@ TextureImporter:
         width: 8
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
