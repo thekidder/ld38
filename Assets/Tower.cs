@@ -39,15 +39,18 @@ public class Tower : Actor {
 
 	public float attackRange;
 	public float cooldownTime;
+	public int maxHp;
 	public GameObject cannonballPrefab;
 
 	public State currentState;
 	private PirateComparer pirateComparer;
 	private GameObject currentTarget;
+	private int currentHp;
 
 	void Start () {
 		currentState = State.SEARCHING;
 		pirateComparer = new PirateComparer(this.gameObject);
+		currentHp = maxHp;
 	}
 	
 	void FixedUpdate () {
@@ -116,13 +119,16 @@ public class Tower : Actor {
 	}
 
 	public void OnHit() {
+		currentHp--;
 
-		if (buildSite != null) {
-			buildSite.SetActive(true);
+		if (currentHp == 0) {
+			if (buildSite != null) {
+				buildSite.SetActive(true);
+			}
+
+			Destroy(this.gameObject);
+			Utility.Redisplay();
 		}
-
-		Destroy(this.gameObject);
-		Utility.Redisplay();
 	}
 
 	public void SetBuildSite(GameObject site) {

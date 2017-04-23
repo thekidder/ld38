@@ -26,6 +26,8 @@ public class Pirate : Boat {
 	public float attackRange;
 	public float cooldownTime;
 
+	public int maxHp;
+
 	public GameObject spawn;
 
 	public GameObject cannonballPrefab;
@@ -34,12 +36,14 @@ public class Pirate : Boat {
 
 	private State currentState;
 	private GameObject currentTarget;
+	private int currentHp;
 	
 
 	protected override void Start () {
 		base.Start();
 		currentState = State.SEARCHING;
 		targetComparer = new TargetComparer();
+		currentHp = maxHp;
 	}
 	
 	void FixedUpdate () {
@@ -115,11 +119,16 @@ public class Pirate : Boat {
 
 	void OnHit() {
 		Debug.Log("onHit pirate");
-		CancelBehavior();
-		Vector3 spawnPos = spawn.transform.position;
-		spawnPos.z = transform.position.z;
-		transform.position = spawnPos;
-		currentState = State.SEARCHING;
+		currentHp--;
+
+		if (currentHp == 0) {
+			CancelBehavior();
+			Vector3 spawnPos = spawn.transform.position;
+			spawnPos.z = transform.position.z;
+			transform.position = spawnPos;
+			currentState = State.SEARCHING;
+			currentHp = maxHp;
+		}
 	}
 
 	bool HasClearShot(Vector2 v, GameObject target) {
