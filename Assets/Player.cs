@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
+	public GameObject victoryOverlay;
+
 	public PlayerResources currentResources;
 	public int diamondGoal;
 	
@@ -11,6 +14,20 @@ public class Player : MonoBehaviour {
 	
 	void Update () {
 		
+	}
+
+	void FixedUpdate() {
+		if (GetDiamonds() >= diamondGoal) {
+			Time.timeScale = 0f;
+			victoryOverlay.SetActive(true);
+			StartCoroutine(NextLevel());
+		}
+	}
+
+	IEnumerator NextLevel() {
+		yield return new WaitForSecondsRealtime(3f);
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		Time.timeScale = 1f;
 	}
 
 	public int GetDiamonds() {

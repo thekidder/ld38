@@ -145,6 +145,8 @@ public class Tower : Actor {
 		cannonball.GetComponent<Cannonball>().velocity = velocity;
 		cannonball.GetComponent<Cannonball>().origin = this.gameObject;
 
+		currentTarget.gameObject.SendMessage("OnTargeted", gameObject);
+
 		currentState = State.COOLDOWN;
 		yield return new WaitForSeconds(cooldownTime);
 		currentState = State.ATTACKING;

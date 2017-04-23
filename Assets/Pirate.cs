@@ -5,13 +5,40 @@ using UnityEngine;
 
 public class TargetComparer : IComparer  
 {
-   public int Compare(System.Object x, System.Object y)  
-   {
-       GameObject lhs = (GameObject)x;
-			 GameObject rhs = (GameObject)y;
+	private Pirate self;
 
-			 return -(lhs.GetComponent<PirateTarget>().value - rhs.GetComponent<PirateTarget>().value);
-   }
+	public TargetComparer(Pirate self) { this.self = self; }
+
+  public int Compare(System.Object x, System.Object y)  
+  {
+		GameObject lhs = (GameObject)x;
+		GameObject rhs = (GameObject)y;
+
+		Merchant lhsMerchant = lhs.GetComponent<Merchant>();
+		Merchant rhsMerchant = rhs.GetComponent<Merchant>();
+
+		if (lhsMerchant != null && lhsMerchant.resourcesToGive.diamonds > 0 &&
+			(rhsMerchant == null || rhsMerchant.resourcesToGive.diamonds == 0)) {
+			return -1;
+		}
+
+		if (rhsMerchant != null && rhsMerchant.resourcesToGive.diamonds > 0 &&
+				(lhsMerchant == null || lhsMerchant.resourcesToGive.diamonds == 0)) {
+			return 1;
+		}
+
+		if (lhsMerchant != null && self.IsInAttackRange(lhs) && 
+				(rhsMerchant == null || !self.IsInAttackRange(rhs))) {
+			return -1;
+		}
+
+		if (lhsMerchant != null && self.IsInAttackRange(lhs) && 
+				(rhsMerchant == null || !self.IsInAttackRange(rhs))) {
+			return 1;
+		}
+
+		return -(lhs.GetComponent<PirateTarget>().value - rhs.GetComponent<PirateTarget>().value);
+  }
 }
 
 public class Pirate : Boat {
@@ -25,6 +52,7 @@ public class Pirate : Boat {
 	public float searchRange;
 	public float attackRange;
 	public float cooldownTime;
+	public float timeBetweenTargeting;
 
 	public int maxHp;
 
@@ -37,12 +65,14 @@ public class Pirate : Boat {
 	private State currentState;
 	private GameObject currentTarget;
 	private int currentHp;
-	
 
-	protected override void Start () {
+	private GameObject lastTargeter = null;
+	private float lastTargetTime = 0f;
+	
+	protected override void Start() {
 		base.Start();
 		currentState = State.SEARCHING;
-		targetComparer = new TargetComparer();
+		targetComparer = new TargetComparer(this);
 		currentHp = maxHp;
 	}
 	
@@ -53,7 +83,10 @@ public class Pirate : Boat {
 				Array.Sort(potentialTargets, targetComparer);
 
 				foreach(GameObject target in potentialTargets) {
-					if (IsInSearchRange(target)) {
+					PirateTarget pirateTarget = target.GetComponent<PirateTarget>();
+
+					if (IsInSearchRange(target) && pirateTarget.value > 0) {
+						Debug.Log("Search complete with " + target.name);
 						currentTarget = target;
 						currentState = State.APPROACHING;
 					}
@@ -61,6 +94,7 @@ public class Pirate : Boat {
 				break;
 			case State.APPROACHING:
 				if (!IsInSearchRange(currentTarget)) {
+					Debug.Log("Lost target due to range (approach)");
 					currentTarget = null;
 					currentState = State.SEARCHING;
 				} else if (IsInAttackRange(currentTarget)) {
@@ -71,6 +105,7 @@ public class Pirate : Boat {
 				break;
 			case State.ATTACKING:
 				if (!IsInSearchRange(currentTarget)) {
+					Debug.Log("Lost target due to range (attack)");
 					currentTarget = null;
 					currentState = State.SEARCHING;
 				} else if (!IsInAttackRange(currentTarget)) {
@@ -94,17 +129,15 @@ public class Pirate : Boat {
 
 		currentState = State.COOLDOWN;
 		yield return new WaitForSeconds(cooldownTime);
-		currentState = State.APPROACHING;
+		currentState = State.SEARCHING;
+		Debug.Log("Fired, finding new target");
+		currentTarget = null;
 
 		currentBehavior = null;
 	}
 
 	bool IsInSearchRange(GameObject target) {
 		if (target == null) { return false; }
-
-	  if(target.GetComponent<PirateTarget>().value <= 0) {
-	  	 return false;
-	  }
 
 		Vector3 viewportPos = Camera.main.WorldToViewportPoint(target.transform.position);
 
@@ -117,7 +150,19 @@ public class Pirate : Boat {
 		return direction.magnitude < searchRange;
 	}
 
-	void OnHit() {
+	public void OnTargeted(GameObject source) {
+		if (Time.time - lastTargetTime > timeBetweenTargeting) {
+			Debug.Log("TARGETED. Going to attack " + source.name);
+			CancelBehavior();
+			currentState = State.APPROACHING;
+			currentTarget = source;
+
+			lastTargetTime = Time.time;
+			lastTargeter = source;
+		}
+	}
+
+	public void OnHit() {
 		Debug.Log("onHit pirate");
 		currentHp--;
 
@@ -142,7 +187,7 @@ public class Pirate : Boat {
 
 	}
 
-	bool IsInAttackRange(GameObject target) {
+	public bool IsInAttackRange(GameObject target) {
 		Vector2 direction = (Vector2)target.transform.position - (Vector2)transform.position;
 
 		if (direction.magnitude > attackRange) {
