@@ -26,6 +26,8 @@ public class Pirate : Boat {
 	public float attackRange;
 	public float cooldownTime;
 
+	public GameObject spawn;
+
 	public GameObject cannonballPrefab;
 
 	private TargetComparer targetComparer;
@@ -84,6 +86,7 @@ public class Pirate : Boat {
 		velocity *= (1f / Constants.PIXEL_SIZE);
 		cannonball.GetComponent<Cannonball>().friendly = false;
 		cannonball.GetComponent<Cannonball>().velocity = velocity;
+		cannonball.GetComponent<Cannonball>().origin = this.gameObject;
 
 		currentState = State.COOLDOWN;
 		yield return new WaitForSeconds(cooldownTime);
@@ -93,6 +96,12 @@ public class Pirate : Boat {
 	}
 
 	bool IsInSearchRange(GameObject target) {
+		if (target == null) { return false; }
+
+	  if(target.GetComponent<PirateTarget>().value <= 0) {
+	  	 return false;
+	  }
+
 		Vector3 viewportPos = Camera.main.WorldToViewportPoint(target.transform.position);
 
 		if (viewportPos.x < 0 || viewportPos.x > 1 || viewportPos.y < 0 || viewportPos.y > 1) {
@@ -107,19 +116,41 @@ public class Pirate : Boat {
 	void OnHit() {
 		Debug.Log("onHit pirate");
 		CancelBehavior();
-		Destroy(this.gameObject);
+		Vector3 spawnPos = spawn.transform.position;
+		spawnPos.z = transform.position.z;
+		transform.position = spawnPos;
+		currentState = State.SEARCHING;
+	}
+
+	bool HasClearShot(Vector2 v, GameObject target) {
+		foreach(RaycastHit2D hit in Physics2D.RaycastAll(transform.position, v.normalized, v.magnitude, LayerMask.GetMask("Boat", "Building"))) {
+			if (hit.collider.gameObject == target || hit.collider.gameObject == this.gameObject) { continue; }
+
+			return false;
+		}
+
+		return true;
+
 	}
 
 	bool IsInAttackRange(GameObject target) {
-		Vector2 direction = (Vector2)transform.position - (Vector2)target.transform.position;
+		Vector2 direction = (Vector2)target.transform.position - (Vector2)transform.position;
 
 		if (direction.magnitude > attackRange) {
 			return false;
 		}
 
-		foreach(RaycastHit2D hit in Physics2D.RaycastAll(transform.position, direction.normalized, direction.magnitude, LayerMask.GetMask("Boat", "Building"))) {
-			if (hit.collider.gameObject == target || hit.collider.gameObject == this.gameObject) { continue; }
+		if (!HasClearShot(direction, target)) {
+			return false;
+		}
 
+		// check in a cone to have a better shot of not getting stuck
+		float epsilonDegrees = 5f;
+		if (!HasClearShot(direction.Rotate(-epsilonDegrees), target)) {
+			return false;
+		}
+
+		if (!HasClearShot(direction.Rotate(epsilonDegrees), target)) {
 			return false;
 		}
 

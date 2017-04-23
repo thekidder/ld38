@@ -15,7 +15,12 @@ public class PlayerResources : System.Object {
 	}
 
 	public static PlayerResources operator-(PlayerResources a, PlayerResources b) {
-		return new PlayerResources(a.gold - b.gold, a.diamonds - b.diamonds);
+		int g = a.gold - b.gold;
+		int d = a.diamonds - b.diamonds;
+
+		if (g < 0) { g = 0; }
+		if (d < 0) { d = 0; }
+		return new PlayerResources(g, d);
 	}
 
 	public static bool operator>=(PlayerResources a, PlayerResources b) {
@@ -24,5 +29,13 @@ public class PlayerResources : System.Object {
 
 	public static bool operator<=(PlayerResources a, PlayerResources b) {
 		return a.gold <= b.gold && a.diamonds <= b.diamonds;
+	}
+
+	public static bool operator<(PlayerResources a, PlayerResources b) {
+		return a.gold < b.gold && a.diamonds < b.diamonds;
+	}
+
+	public static bool operator>(PlayerResources a, PlayerResources b) {
+		return a.gold > b.gold && a.diamonds > b.diamonds;
 	}
 }

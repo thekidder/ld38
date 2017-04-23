@@ -67,7 +67,7 @@ public class Merchant : Boat {
 	IEnumerator Deposit() {
 		currentState = State.DEPOSITING;
 		yield return new WaitForSeconds(deliverTime);
-		player.currentResources += resourcesToGive;
+		player.AddResources(resourcesToGive);
 		currentState = State.RETURNING;
 		currentBehavior = null;
 	}

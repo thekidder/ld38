@@ -15,6 +15,6 @@ public class ResourceDisplay : MonoBehaviour {
 	
 	void Update () {
 		gold.text = "Gold: " + player.currentResources.gold;
-		diamonds.text = "Diamonds: " + player.currentResources.diamonds;
+		diamonds.text = "Diamonds: " + player.GetDiamonds() + " / " + player.diamondGoal;
 	}
 }

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Cannonball : MonoBehaviour {
 	public bool friendly;
+	public GameObject origin;
 	public Vector2 velocity;
 
 	void Start () {
-		
 	}
 	
 	void FixedUpdate () {
@@ -23,11 +23,21 @@ public class Cannonball : MonoBehaviour {
 		}
 	}
 
+	void OnTriggerExit2D(Collider2D collider) {
+	}
+
 	void OnTriggerEnter2D(Collider2D collider) {
-		Debug.Log("trigger " + collider.gameObject.name + " " + friendly);
+		// Debug.Log("trigger " + collider.gameObject.name + " " + friendly);
 		if ((collider.gameObject.CompareTag("Piratable") && !friendly) || (collider.gameObject.CompareTag("Pirate") && friendly)) {
 			collider.gameObject.SendMessage("OnHit");
 			Destroy(this.gameObject);
+		}
+
+		if (collider.gameObject.layer == LayerMask.NameToLayer("Building")) {
+			if (collider.gameObject != origin) {
+				// always destroy when we hit a building
+				Destroy(this.gameObject);
+			}
 		}
 	}
 }

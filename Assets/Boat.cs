@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boat : MonoBehaviour {
+public class Boat : Actor {
 	public Sprite side;
 	public Sprite back;
 
@@ -12,8 +12,6 @@ public class Boat : MonoBehaviour {
 	private Vector2 facing;
 	private bool followingEdge;
 	private static float speed = 1f / Constants.PIXEL_SIZE;
-
-	protected IEnumerator currentBehavior = null;
 
 	protected virtual void Start() {
 		spriteRenderer = GetComponent<SpriteRenderer>();
@@ -125,20 +123,4 @@ public class Boat : MonoBehaviour {
 		}
 		facing = direction;
 	}
-
-	protected void StartBehavior(IEnumerator behavior) {
-		if (currentBehavior != null) {
-			Debug.LogWarning("Multiple active behaviors on " + name + "!");
-		}
-		StartCoroutine(behavior);
-		currentBehavior = behavior;
-	}
-
-	protected void CancelBehavior() {
-		if (currentBehavior != null) {
-			StopCoroutine(currentBehavior);
-		}
-		currentBehavior = null;
-	}
-
 }
