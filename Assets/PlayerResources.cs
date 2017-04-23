@@ -13,4 +13,16 @@ public class PlayerResources : System.Object {
 	public static PlayerResources operator+(PlayerResources a, PlayerResources b) {
 		return new PlayerResources(a.gold + b.gold, a.diamonds + b.diamonds);
 	}
+
+	public static PlayerResources operator-(PlayerResources a, PlayerResources b) {
+		return new PlayerResources(a.gold - b.gold, a.diamonds - b.diamonds);
+	}
+
+	public static bool operator>=(PlayerResources a, PlayerResources b) {
+		return a.gold >= b.gold && a.diamonds >= b.diamonds;
+	}
+
+	public static bool operator<=(PlayerResources a, PlayerResources b) {
+		return a.gold <= b.gold && a.diamonds <= b.diamonds;
+	}
 }

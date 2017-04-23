@@ -80,14 +80,15 @@ public class Pirate : Boat {
 
 	IEnumerator Fire() {
 		GameObject cannonball = (GameObject)Instantiate(cannonballPrefab, transform.position, Quaternion.identity);
-		Vector2 velocity = (currentTarget.transform.position - transform.position).normalized;
-		velocity *= 1f / Constants.PIXEL_SIZE;
+		Vector2 velocity = ((Vector2)currentTarget.transform.position - (Vector2)transform.position).normalized;
+		velocity *= (1f / Constants.PIXEL_SIZE);
+		cannonball.GetComponent<Cannonball>().friendly = false;
 		cannonball.GetComponent<Cannonball>().velocity = velocity;
 
 		currentState = State.COOLDOWN;
-
 		yield return new WaitForSeconds(cooldownTime);
 		currentState = State.APPROACHING;
+
 		currentBehavior = null;
 	}
 
@@ -103,6 +104,12 @@ public class Pirate : Boat {
 		return direction.magnitude < searchRange;
 	}
 
+	void OnHit() {
+		Debug.Log("onHit pirate");
+		CancelBehavior();
+		Destroy(this.gameObject);
+	}
+
 	bool IsInAttackRange(GameObject target) {
 		Vector2 direction = (Vector2)transform.position - (Vector2)target.transform.position;
 
@@ -110,7 +117,7 @@ public class Pirate : Boat {
 			return false;
 		}
 
-		foreach(RaycastHit2D hit in Physics2D.RaycastAll(transform.position, direction.normalized, direction.magnitude, LayerMask.GetMask("Boat", "Island"))) {
+		foreach(RaycastHit2D hit in Physics2D.RaycastAll(transform.position, direction.normalized, direction.magnitude, LayerMask.GetMask("Boat", "Building"))) {
 			if (hit.collider.gameObject == target || hit.collider.gameObject == this.gameObject) { continue; }
 
 			return false;

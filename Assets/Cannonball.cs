@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Cannonball : MonoBehaviour {
+	public bool friendly;
 	public Vector2 velocity;
 
 	void Start () {
@@ -23,7 +24,8 @@ public class Cannonball : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D collider) {
-		if (collider.gameObject.CompareTag("Piratable")) {
+		Debug.Log("trigger " + collider.gameObject.name + " " + friendly);
+		if ((collider.gameObject.CompareTag("Piratable") && !friendly) || (collider.gameObject.CompareTag("Pirate") && friendly)) {
 			collider.gameObject.SendMessage("OnHit");
 			Destroy(this.gameObject);
 		}

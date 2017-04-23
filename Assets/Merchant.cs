@@ -60,7 +60,7 @@ public class Merchant : Boat {
 
 	void OnHit() {
 		CancelBehavior();
-		this.transform.position = this.loadingZone.transform.position;
+		this.transform.position = new Vector3(this.loadingZone.transform.position.x, this.loadingZone.transform.position.y, -1f);
 		StartBehavior(Load());
 	}
 
