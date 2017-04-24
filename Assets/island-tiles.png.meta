@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: c1c816ee6549d4412a5ab32c4640fa10
-timeCreated: 1492984136
+timeCreated: 1492991061
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -685,6 +685,7 @@ TextureImporter:
     21301356: UI-panel
     21301358: UI button
     21301360: UI BG
+    21301362: wall-back
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -7067,7 +7068,20 @@ TextureImporter:
         width: 8
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: wall-back
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 104
+        width: 8
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.44444445}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

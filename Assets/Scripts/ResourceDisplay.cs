@@ -21,7 +21,7 @@ public class ResourceDisplay : MonoBehaviour {
 		int gems = player.GetDiamonds();
 		int maxGems = player.GemCapacity();
 
-		gemsFull.SetActive(gems == maxGems);
+		gemsFull.SetActive(gems == maxGems && gems < player.diamondGoal);
 
 		gold.text = "Gold: " + player.currentResources.gold;
 		diamonds.text = "Gems: " + gems + " / " + maxGems;

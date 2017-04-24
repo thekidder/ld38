@@ -92,15 +92,15 @@ public class Tower : Actor {
 		gameObject.tag = "Piratable";
 		currentState = State.SEARCHING;
 		if (hasLeftNeighbor && hasRightNeighbor) {
-			spriteRenderer.sprite = wallHorizontal;
-			CancelBehavior();
-			currentState = State.WALL;
-			gameObject.tag = "Untagged";
+			spriteRenderer.sprite = towerBack;
+			// CancelBehavior();
+			// currentState = State.WALL;
+			// gameObject.tag = "Untagged";
 		} else if (hasTopNeighbor && hasBottomNeighbor) {
-			spriteRenderer.sprite = wallVertical;
-			CancelBehavior();
-			currentState = State.WALL;
-			gameObject.tag = "Untagged";
+			spriteRenderer.sprite = towerBack;
+			// CancelBehavior();
+			// currentState = State.WALL;
+			// gameObject.tag = "Untagged";
 		} else if (hasBottomNeighbor && hasLeftNeighbor) {
 			spriteRenderer.sprite = towerBackRight;
 		} else if (hasBottomNeighbor && hasRightNeighbor) {

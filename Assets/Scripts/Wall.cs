@@ -14,13 +14,36 @@ public class Wall : Actor {
 	public Sprite wallLeft;
 	public Sprite wallFreestanding;
 
+	public int maxHp;
+	public int currentHp;
+
+	public GameObject buildSite;
+
 	void Start () {
-		
+		currentHp = maxHp;
 	}
 	
 	void Update () {
 		
 	}
+	
+	public void SetBuildSite(GameObject site) {
+		buildSite = site;
+	}
+
+	public void OnHit() {
+		currentHp--;
+
+		if (currentHp == 0) {
+			if (buildSite != null) {
+				buildSite.SetActive(true);
+			}
+
+			Destroy(this.gameObject);
+			Utility.Redisplay();
+		}
+	}
+
 
 	public void Redisplay() {
 		bool hasTopNeighbor = findBuilding((Vector2)transform.position + Vector2.up);

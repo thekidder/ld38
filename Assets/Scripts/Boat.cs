@@ -5,6 +5,7 @@ using UnityEngine;
 public class Boat : Actor {
 	public Sprite side;
 	public Sprite back;
+	public bool oppositeDirection;
 
 	private SpriteRenderer spriteRenderer;
 	private BoxCollider2D boxCollider;
@@ -70,7 +71,12 @@ public class Boat : Actor {
 		// first finish following the current edge
 		if (followingEdge) {
 			// Debug.Log(name + " can follow edge going " + facing + "?");
-			Vector2 turnDirection = CounterClockwise(facing) * speed;
+			Vector2 turnDirection;
+			if (!oppositeDirection) {
+				turnDirection = CounterClockwise(facing) * speed;
+			} else {
+				turnDirection = Clockwise(facing) * speed;
+			}
 			if (Move(turnDirection)) {
 				// Debug.Log(name + " turning to " + turnDirection + "!");
 				followingEdge = false;
@@ -96,7 +102,11 @@ public class Boat : Actor {
 		direction = facing;
 		followingEdge = true;
 		for (int i = 0; i < 3; ++i) {
-			direction = Clockwise(direction) * speed;
+			if (!oppositeDirection) {
+				direction = Clockwise(direction) * speed;
+			} else {
+				direction = CounterClockwise(direction) * speed;
+			}
 			// Debug.Log(name + " trying " + direction + " instead...");
 			if (Move(direction)) {
 				// Debug.Log(name + " found edge!");

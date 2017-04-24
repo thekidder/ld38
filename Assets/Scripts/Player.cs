@@ -7,10 +7,15 @@ public class Player : MonoBehaviour {
 	public GameObject victoryOverlay;
 	public Text victoryText;
 
+	public GameObject canvas1;
+	public GameObject canvas2;
+
 	public PlayerResources currentResources;
 	public int diamondGoal;
 	
 	void Start () {
+		canvas1.SetActive(true);
+		canvas2.SetActive(true);
 	}
 	
 	void Update () {

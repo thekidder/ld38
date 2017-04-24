@@ -74,6 +74,7 @@ public class Pirate : Boat {
 		currentState = State.SEARCHING;
 		targetComparer = new TargetComparer(this);
 		currentHp = maxHp;
+		
 	}
 	
 	void FixedUpdate () {
@@ -89,6 +90,7 @@ public class Pirate : Boat {
 						Debug.Log("Search complete with " + target.name);
 						currentTarget = target;
 						currentState = State.APPROACHING;
+						break;
 					}
 				}
 				break;
@@ -183,6 +185,11 @@ public class Pirate : Boat {
 	}
 
 	bool HasClearShot(Vector2 v, GameObject target) {
+		if (target.layer != LayerMask.NameToLayer("Boat")) {
+			// don't try to get a clear shot for buildings - just shoot them all
+			return true;
+		}
+
 		foreach(RaycastHit2D hit in Physics2D.RaycastAll(transform.position, v.normalized, v.magnitude, LayerMask.GetMask("Boat", "Building"))) {
 			if (hit.collider.gameObject == target || hit.collider.gameObject == this.gameObject) { continue; }
 
